@@ -49,7 +49,7 @@ def volt_to_abs (df, option):
             cal_abs.append(abs[i])
     
     # 2D Savitzky-Golay filter
-    sg_abs = savgol_filter(abs, 5, 2)
+    sg_abs = savgol_filter(abs, 11, 2)
 
     # One-phase fitting
     fit_time, fit_abs = one_phase_fit(cal_time, cal_abs)
