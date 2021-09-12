@@ -49,8 +49,7 @@ def volt_to_abs (df, option):
             cal_abs.append(abs[i])
     
     # 2D Savitzky-Golay filter
-    absarray = np.array(abs)
-    sg_abs = savgol_filter(absarray, 5, 2)
+    sg_abs = savgol_filter(abs, 5, 2)
 
     # One-phase fitting
     fit_time, fit_abs = one_phase_fit(cal_time, cal_abs)
@@ -61,7 +60,7 @@ def volt_to_abs (df, option):
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     font = {'family': 'arial', 'weight': 'bold', 'size': 18}
-    plt.plot(time, abs, 'k')
+    plt.plot(time, sg_abs, 'k')
     plt.plot(fit_time, fit_abs, 'r')
     plt.xlabel('Time (s)', fontdict=font, labelpad=13)
     plt.ylabel('Δ Abs. (AU)', fontdict=font, labelpad=15)
@@ -80,4 +79,4 @@ if __name__ == '__main__':
     df = pd.read_csv(input_path, skiprows=15, header=None, index_col=None)
     fig = volt_to_abs(df, option)
     input_path = os.path.splitext(input_path)[0]
-    fig.savefig(input_path+".png", bbox_inches='tight')
+    #fig.savefig(input_path+".png", bbox_inches='tight')
